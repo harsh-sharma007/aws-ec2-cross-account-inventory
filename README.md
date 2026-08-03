@@ -87,3 +87,102 @@ Attach the `AWSLambdaBasicExecutionRole` managed policy (for CloudWatch Logging)
         }
     ]
 }
+
+
+### Prompts used
+
+
+"Develop an automated solution that gathers EC2 inventory across multiple AWS accounts and regions using AWS Organizations or AssumeRole. Collect instance details, OS, IPS, AMIS, security groups, EBS volumes, backup status, ASG membership, tags, and resource utilization. Automatically identify Auto Scaling instances without Name tags and populate names using launch template or ASG tags. Consolidate data into a standardized Excel workbook with multiple worksheets and automatically email the final report to clients every month."
+
+"i don't want to use ecs fargate"
+
+"i want to use lambda only, and i want one workbook in which there will be sheets per account in which the inventory will be there"
+
+"what iam permissions should i give to the lambda function"
+
+"is there any other way to create this automation"
+
+"how will the report look like if we use the lambda function"
+
+"this will work with multiple accounts in the organization right?"
+
+"will it work if we have like 9 accounts in the org and like 200 servers per account"
+
+"it doesn't provide the ebs volumes attached, asg membership, tags per instance?"
+
+"how will the sheet look like now?"
+
+"what will be the associated cost?"
+
+"outside of free tier?"
+
+"can i also create the lambda function that i can pass the account id for which i want the lambda to fetch the ec2 inventory?"
+
+"but i want this to work for all the accounts when it runs automatically every month"
+
+"[WARNING] 2026-07-15T18:09:52.343Z LAMBDA_WARNING... [ERROR] Runtime.ImportModuleError: Unable to import module 'lambda_function': No module named 'pandas'" (Pasted Error Log)
+
+
+"[WARNING] 2026-07-15T18:12:47.849Z LAMBDA_WARNING... [ERROR] AttributeError: 'None Type' object has no attribute 'split'" (Pasted Error Log)
+
+
+"[WARNING] 2026-07-15T18:14:17.453Z LAMBDA_WARNING... [ERROR] AttributeError: 'NoneType' object has no attribute 'split'" (Pasted Error Log)
+
+
+"currently i am testing in a single aws account, there is no aws org setup, so while testing the lambda function is failing"
+
+"currently i want it to work like the accounts in which i configure the assume role for the lambda function, for those accounts only i should get the inventory"
+
+"will it also work if i don't specify the accounts and it can automaticall fetch the data of the accounts on which the assume role has been created?"
+
+"lets suppose i want the inventroy of the account in which i am running the lambda function then will it work for the account?"
+
+"give the code"
+
+"the lambda function executed but i didn't receive any excel sheet"
+
+"i am still not getting any email attachment"
+
+"give me the updated code and the region we are using is ap-south-1"
+
+"it worked now but didn't include the security group, tags"
+
+"IT STILL DIDN'T HAVE THE SECURITY GROUP DETAILS"
+
+"okay perfect now i want you to formatize the email a lil bit"
+
+"make the subject AWS EC2 Inventory"
+
+"okay now i have another account for testing so give me the assume role configuration now"
+
+"Add this block to your Lambda Execution Role Policy: JSON { "Sid": 
+"AllowCrossAccountRoleAssumption", "Effect": "Allow", "Action": "sts:AssumeRole", "Resource": "arn:aws:iam::*:role/EC2InventoryRole" } WHERE TO ADD THIS?"
+
+"GIVE A SEPARATE POLICY"
+
+"okay its working fine now for multi account too, now i want to make the excel sheet look a lil better, in every sheet, there should be the AWS Account name mentioned above the content"
+
+"okay now a few changes that i need are borders to be added the inventory subject should have the name of the month for which the inventory report is being generated"
+
+"the excel report is like that, i have to manually stretch the columns to see the data"
+
+"the data should be centre aligned"
+
+"okay all sorted till now moving on the next step we want to identify the instances which don't have any name tag and are launched by an autoscaling group and list those resources after the inventory list for the ec2 instances, i want the details like instance id, name, private ip of those instances"
+
+"it didn't show any data in the sheet for the untagged instances which are a part of an asg"
+
+"don't add the asg name in the name column where there is no name just leave it blank, we will add the name manually from our side in the sheet also add the status, region, instance type for these instances"
+
+"this time the excel sheet didn't had any table for the instances without any name tags"
+
+"i don't want to create any tags, i just want the report for the instances without the name tags along with the inventory"
+
+"also include the asg name in the instances with no tag table"
+
+"what libraries are we using here and what is their function"
+
+"can you explain how the iam policy for cross account is working here"
+
+"it takes like 30 seconds for this lambda function to run, will it run when i have like 10 aws accounts and 200 servers/account"
+
